@@ -1,0 +1,46 @@
+#! /bin/bash
+
+if [ $@ == "up" ]
+then
+docker-compose up
+fi
+
+if [ $@ == "down" ]
+then
+docker-compose down
+fi
+
+if [ $@ == "build" ]
+then
+docker-compose build
+fi
+
+if [ $@ == "start" ]
+then
+sudo service docker start
+fi
+
+if [ $@ == "console" ]
+then
+docker-compose run web bundle exec rails c
+fi
+
+if [ $@ == "db:setup" ]
+then
+docker-compose run web bundle exec rake db:setup
+fi
+
+if [ $@ == "db:drop" ]
+then
+docker-compose run web bundle exec rake db:drop
+fi
+
+if [$@ == "spec"]
+then
+docker-compose run web bundle exec rake rspec spec
+fi
+
+if [$@ == "prune"]
+then
+docker system prune
+fi
